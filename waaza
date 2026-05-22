@@ -45,12 +45,16 @@ end
 
 local Themes = {
 
-    Default = {
-       Background = Color3.fromRGB(18,18,22)
-Sidebar = Color3.fromRGB(22,22,26)
-Surface = Color3.fromRGB(28,28,32)
-Stroke = Color3.fromRGB(45,45,50)
-    },
+   Default = {
+    Background = Color3.fromRGB(18,18,22),
+    Sidebar = Color3.fromRGB(22,22,26),
+    Surface = Color3.fromRGB(28,28,32),
+    Stroke = Color3.fromRGB(45,45,50),
+
+    Accent = Color3.fromRGB(255,140,45),
+    Text = Color3.fromRGB(255,255,255),
+    DarkText = Color3.fromRGB(170,170,170)
+},
 
     Purple = {
         Background = Color3.fromRGB(16,16,16),
@@ -437,80 +441,7 @@ SearchBox.TextSize = 13
 SearchBox.TextXAlignment = Enum.TextXAlignment.Left
 SearchBox.Parent = SearchFrame
     
-    ------------------------------------------------
--- TOPBAR
-------------------------------------------------
-
-local Topbar = Instance.new("Frame")
-Topbar.Size = UDim2.new(1,0,0,42)
-Topbar.BackgroundTransparency = 1
-Topbar.Parent = Main
-
-------------------------------------------------
--- TITLE
-------------------------------------------------
-
-local TopTitle = Instance.new("TextLabel")
-TopTitle.BackgroundTransparency = 1
-TopTitle.Position = UDim2.new(0,16,0,0)
-TopTitle.Size = UDim2.new(0,200,1,0)
-TopTitle.Font = Enum.Font.GothamBold
-TopTitle.Text = "premium"
-TopTitle.TextColor3 = Theme.Text
-TopTitle.TextSize = 18
-TopTitle.TextXAlignment = Enum.TextXAlignment.Left
-TopTitle.Parent = Topbar
-
-------------------------------------------------
--- VERSION
-------------------------------------------------
-
-local Version = Instance.new("TextLabel")
-Version.BackgroundTransparency = 1
-Version.Position = UDim2.new(0,110,0,0)
-Version.Size = UDim2.new(0,60,1,0)
-Version.Font = Enum.Font.Gotham
-Version.Text = "v1.0"
-Version.TextColor3 = Theme.DarkText
-Version.TextSize = 13
-Version.TextXAlignment = Enum.TextXAlignment.Left
-Version.Parent = Topbar
-
-------------------------------------------------
--- FPS
-------------------------------------------------
-
-local FPS = Instance.new("TextLabel")
-FPS.BackgroundTransparency = 1
-FPS.AnchorPoint = Vector2.new(1,0)
-FPS.Position = UDim2.new(1,-120,0,0)
-FPS.Size = UDim2.new(0,60,1,0)
-FPS.Font = Enum.Font.GothamMedium
-FPS.Text = "0 FPS"
-FPS.TextColor3 = Theme.Text
-FPS.TextSize = 13
-FPS.TextXAlignment = Enum.TextXAlignment.Right
-FPS.Parent = Topbar
-
-------------------------------------------------
--- USERNAME
-------------------------------------------------
-
-local Username = Instance.new("TextLabel")
-Username.BackgroundTransparency = 1
-Username.AnchorPoint = Vector2.new(1,0)
-Username.Position = UDim2.new(1,-16,0,0)
-Username.Size = UDim2.new(0,90,1,0)
-Username.Font = Enum.Font.GothamMedium
-Username.Text = game.Players.LocalPlayer.Name
-Username.TextColor3 = Theme.Accent
-Username.TextSize = 13
-Username.TextXAlignment = Enum.TextXAlignment.Right
-    
-
-
-
-
+   
     local Content = Instance.new("Frame")
     Content.Size = UDim2.new(1,-200,1,-20)
    Content.Position = UDim2.new(0,190,0,50)
@@ -1021,7 +952,6 @@ function Section:CreateSlider(Data)
         SetValue(Default)
     end)
 
-    Slider.Set = SetValue
 
 
 table.insert(Section.Elements,{
@@ -1879,6 +1809,47 @@ function Window:Toggle(State)
     ToggleWindow(State)
 
 end
+
+
+------------------------------------------------
+-- AUTO RESIZE SECTIONS AFTER SEARCH
+------------------------------------------------
+
+local function RefreshSections()
+
+    for _,Tab in pairs(Window.Tabs) do
+
+        for _,Section in pairs(Tab.Sections) do
+
+            local VisibleCount = 0
+
+            for _,Element in pairs(Section.Elements) do
+
+                if Element.Object.Visible then
+                    VisibleCount += Element.Object.Size.Y.Offset + 10
+                end
+
+            end
+
+           Section.Holder.Size = UDim2.new(
+    1,
+    -24,
+    0,
+    VisibleCount
+)
+
+SectionFrame.Visible = VisibleCount > 0
+
+        end
+
+    end
+
+end
+
+------------------------------------------------
+-- SEARCH
+------------------------------------------------
+
 SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
 
     local Search = string.lower(SearchBox.Text)
@@ -1905,8 +1876,9 @@ SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
 
     end
 
-end)
+    RefreshSections()
 
+end)
 
     return Window
 
