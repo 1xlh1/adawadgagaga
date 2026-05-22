@@ -46,12 +46,10 @@ end
 local Themes = {
 
     Default = {
-        Background = Color3.fromRGB(16,16,16),
-        Sidebar = Color3.fromRGB(21,21,21),
-        Accent = Color3.fromRGB(255,140,45),
-        Text = Color3.fromRGB(255,255,255),
-        DarkText = Color3.fromRGB(170,170,170),
-        Stroke = Color3.fromRGB(40,40,40)
+       Background = Color3.fromRGB(18,18,22)
+Sidebar = Color3.fromRGB(22,22,26)
+Surface = Color3.fromRGB(28,28,32)
+Stroke = Color3.fromRGB(45,45,50)
     },
 
     Purple = {
@@ -348,7 +346,7 @@ UIScale.Parent = Main
     ------------------------------------------------
 
     local Sidebar = Instance.new("Frame")
-    Sidebar.Size = UDim2.new(0, 190, 1, 0)
+    Sidebar.Size = UDim2.new(0, 150, 1, 0)
     Sidebar.BackgroundColor3 = Theme.Sidebar
     Sidebar.BorderSizePixel = 0
     Sidebar.Parent = Main
@@ -363,7 +361,8 @@ Library:RegisterTheme(Sidebar,"BackgroundColor3","Sidebar")
     ------------------------------------------------
 
     local Title = Instance.new("TextLabel")
-    Title.Size = UDim2.new(1,0,0,60)
+  Title.Position = UDim2.new(0,0,0,10)
+Title.Size = UDim2.new(1,0,0,50)
     Title.BackgroundTransparency = 1
     Title.Text = Settings.Title or "premium"
     Title.Font = Enum.Font.GothamBold
@@ -378,7 +377,7 @@ Library:RegisterTheme(Sidebar,"BackgroundColor3","Sidebar")
     local TabHolder = Instance.new("Frame")
     TabHolder.BackgroundTransparency = 1
     TabHolder.Size = UDim2.new(1,0,1,-70)
-    TabHolder.Position = UDim2.new(0,0,0,70)
+   TabHolder.Position = UDim2.new(0,0,0,90)
     TabHolder.Parent = Sidebar
 
     local TabLayout = Instance.new("UIListLayout")
@@ -437,12 +436,187 @@ SearchBox.PlaceholderColor3 = Theme.DarkText
 SearchBox.TextSize = 13
 SearchBox.TextXAlignment = Enum.TextXAlignment.Left
 SearchBox.Parent = SearchFrame
+    
+    ------------------------------------------------
+-- TOPBAR
+------------------------------------------------
+
+local Topbar = Instance.new("Frame")
+Topbar.Size = UDim2.new(1,0,0,42)
+Topbar.BackgroundTransparency = 1
+Topbar.Parent = Main
+
+------------------------------------------------
+-- TITLE
+------------------------------------------------
+
+local TopTitle = Instance.new("TextLabel")
+TopTitle.BackgroundTransparency = 1
+TopTitle.Position = UDim2.new(0,16,0,0)
+TopTitle.Size = UDim2.new(0,200,1,0)
+TopTitle.Font = Enum.Font.GothamBold
+TopTitle.Text = "premium"
+TopTitle.TextColor3 = Theme.Text
+TopTitle.TextSize = 18
+TopTitle.TextXAlignment = Enum.TextXAlignment.Left
+TopTitle.Parent = Topbar
+
+------------------------------------------------
+-- VERSION
+------------------------------------------------
+
+local Version = Instance.new("TextLabel")
+Version.BackgroundTransparency = 1
+Version.Position = UDim2.new(0,110,0,0)
+Version.Size = UDim2.new(0,60,1,0)
+Version.Font = Enum.Font.Gotham
+Version.Text = "v1.0"
+Version.TextColor3 = Theme.DarkText
+Version.TextSize = 13
+Version.TextXAlignment = Enum.TextXAlignment.Left
+Version.Parent = Topbar
+
+------------------------------------------------
+-- FPS
+------------------------------------------------
+
+local FPS = Instance.new("TextLabel")
+FPS.BackgroundTransparency = 1
+FPS.AnchorPoint = Vector2.new(1,0)
+FPS.Position = UDim2.new(1,-120,0,0)
+FPS.Size = UDim2.new(0,60,1,0)
+FPS.Font = Enum.Font.GothamMedium
+FPS.Text = "0 FPS"
+FPS.TextColor3 = Theme.Text
+FPS.TextSize = 13
+FPS.TextXAlignment = Enum.TextXAlignment.Right
+FPS.Parent = Topbar
+
+------------------------------------------------
+-- USERNAME
+------------------------------------------------
+
+local Username = Instance.new("TextLabel")
+Username.BackgroundTransparency = 1
+Username.AnchorPoint = Vector2.new(1,0)
+Username.Position = UDim2.new(1,-16,0,0)
+Username.Size = UDim2.new(0,90,1,0)
+Username.Font = Enum.Font.GothamMedium
+Username.Text = game.Players.LocalPlayer.Name
+Username.TextColor3 = Theme.Accent
+Username.TextSize = 13
+Username.TextXAlignment = Enum.TextXAlignment.Right
+    
+
+
+
+
     local Content = Instance.new("Frame")
     Content.Size = UDim2.new(1,-200,1,-20)
-    Content.Position = UDim2.new(0,190,0,10)
+   Content.Position = UDim2.new(0,190,0,50)
     Content.BackgroundTransparency = 1
+
     
-    
+------------------------------------------------
+-- TOPBAR
+------------------------------------------------
+
+local Topbar = Instance.new("Frame")
+Topbar.Size = UDim2.new(1,0,0,42)
+Topbar.BackgroundTransparency = 1
+Topbar.Parent = Main
+
+------------------------------------------------
+-- TITLE
+------------------------------------------------
+
+local TopTitle = Instance.new("TextLabel")
+TopTitle.BackgroundTransparency = 1
+TopTitle.Position = UDim2.new(0,16,0,0)
+TopTitle.Size = UDim2.new(0,200,1,0)
+TopTitle.Font = Enum.Font.GothamBold
+TopTitle.Text = "premium"
+TopTitle.TextColor3 = Theme.Text
+TopTitle.TextSize = 18
+TopTitle.TextXAlignment = Enum.TextXAlignment.Left
+TopTitle.Parent = Topbar
+
+------------------------------------------------
+-- VERSION
+------------------------------------------------
+
+local Version = Instance.new("TextLabel")
+Version.BackgroundTransparency = 1
+Version.Position = UDim2.new(0,110,0,0)
+Version.Size = UDim2.new(0,60,1,0)
+Version.Font = Enum.Font.Gotham
+Version.Text = "v1.0"
+Version.TextColor3 = Theme.DarkText
+Version.TextSize = 13
+Version.TextXAlignment = Enum.TextXAlignment.Left
+Version.Parent = Topbar
+
+------------------------------------------------
+-- FPS
+------------------------------------------------
+
+local FPS = Instance.new("TextLabel")
+FPS.BackgroundTransparency = 1
+FPS.AnchorPoint = Vector2.new(1,0)
+FPS.Position = UDim2.new(1,-120,0,0)
+FPS.Size = UDim2.new(0,60,1,0)
+FPS.Font = Enum.Font.GothamMedium
+FPS.Text = "0 FPS"
+FPS.TextColor3 = Theme.Text
+FPS.TextSize = 13
+FPS.TextXAlignment = Enum.TextXAlignment.Right
+FPS.Parent = Topbar
+
+------------------------------------------------
+-- USERNAME
+------------------------------------------------
+
+local Username = Instance.new("TextLabel")
+Username.BackgroundTransparency = 1
+Username.AnchorPoint = Vector2.new(1,0)
+Username.Position = UDim2.new(1,-16,0,0)
+Username.Size = UDim2.new(0,90,1,0)
+Username.Font = Enum.Font.GothamMedium
+Username.Text = game.Players.LocalPlayer.Name
+Username.TextColor3 = Theme.Accent
+Username.TextSize = 13
+Username.TextXAlignment = Enum.TextXAlignment.Right
+Username.Parent = Topbar
+
+
+------------------------------------------------
+-- FPS COUNTER
+------------------------------------------------
+
+task.spawn(function()
+
+    local Frames = 0
+    local Last = tick()
+
+    game:GetService("RunService").RenderStepped:Connect(function()
+
+        Frames += 1
+
+        if tick() - Last >= 1 then
+
+            FPS.Text = tostring(Frames) .. " FPS"
+
+            Frames = 0
+            Last = tick()
+
+        end
+
+    end)
+
+end)
+
+
+
     Content.Parent = Main
 
     ------------------------------------------------
